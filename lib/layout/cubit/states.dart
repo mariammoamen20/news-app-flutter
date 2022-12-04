@@ -35,3 +35,13 @@ class AppNewsGetScienceErrorState extends NewsStates {
 }
 
 class AppChangeDarkModel extends NewsStates{}
+
+class AppNewsGetSearcheLoadingState extends NewsStates {}
+
+class AppNewsGetSearchSuccessState extends NewsStates {}
+
+class AppNewsGetSearchErrorState extends NewsStates {
+  final String message;
+
+  AppNewsGetSearchErrorState(this.message);
+}

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_flutter/layout/cubit/cubit.dart';
 import 'package:news_app_flutter/layout/cubit/states.dart';
-import 'package:news_app_flutter/shared/network/remote/dio_helper.dart';
+import 'package:news_app_flutter/modules/search/search_screen.dart';
+import 'package:news_app_flutter/shared/components/components.dart';
 
 class NewsLayout extends StatelessWidget {
   const NewsLayout({Key? key}) : super(key: key);
@@ -17,7 +18,9 @@ class NewsLayout extends StatelessWidget {
           appBar: AppBar(
             title:const Text('News App'),
             actions: [
-              IconButton(onPressed: (){}, icon: const Icon(Icons.search)),
+              IconButton(onPressed: (){
+                navigateTo(context, SearchScreen());
+              }, icon: const Icon(Icons.search)),
               IconButton(
                   onPressed: (){
                cubit.changeDarkMode();

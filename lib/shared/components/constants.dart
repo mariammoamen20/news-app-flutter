@@ -1,0 +1,1 @@
+//https://newsapi.org/v2/everything?q=bts&apiKey=8606b4b05fdb4a99a3e944b172293a8a
