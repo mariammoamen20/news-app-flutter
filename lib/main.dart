@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
           elevation: 0.0,
         ),
       ),
+      //Directionality بتخلي الاب بدا ما يبدا من الشمال لليمين ممكن اخليه يبدا من اليمين لشمال في حاله العربي
       home: const Directionality(
           textDirection: TextDirection.rtl,
           child: NewsLayout()),
