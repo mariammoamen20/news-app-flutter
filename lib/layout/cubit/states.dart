@@ -13,6 +13,7 @@ class AppNewsGetBusinessErrorState extends NewsStates {
 
   AppNewsGetBusinessErrorState(this.message);
 }
+
 class AppNewsGetSportsLoadingState extends NewsStates {}
 
 class AppNewsGetSportsSuccessState extends NewsStates {}
@@ -22,6 +23,7 @@ class AppNewsGetSportsErrorState extends NewsStates {
 
   AppNewsGetSportsErrorState(this.message);
 }
+
 class AppNewsGetScienceLoadingState extends NewsStates {}
 
 class AppNewsGetScienceSuccessState extends NewsStates {}
@@ -31,3 +33,5 @@ class AppNewsGetScienceErrorState extends NewsStates {
 
   AppNewsGetScienceErrorState(this.message);
 }
+
+class AppChangeDarkModel extends NewsStates{}

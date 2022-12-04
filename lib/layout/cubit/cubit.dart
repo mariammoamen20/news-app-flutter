@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_flutter/layout/cubit/states.dart';
 import 'package:news_app_flutter/modules/science/science_screen.dart';
-import 'package:news_app_flutter/modules/settings/settings_screen.dart';
 import 'package:news_app_flutter/modules/sports/sports_screen.dart';
+import 'package:news_app_flutter/shared/network/local/cash_helper.dart';
 import 'package:news_app_flutter/shared/network/remote/dio_helper.dart';
 
 import '../../modules/business/business_screen.dart';
@@ -30,18 +30,13 @@ class NewsCubit extends Cubit<NewsStates> {
           Icons.science,
         ),
         label: 'Science'),
-    const BottomNavigationBarItem(
-        icon: Icon(
-          Icons.settings,
-        ),
-        label: 'Settings'),
+
   ];
 
   List<Widget> screens = const [
     BusinessScreen(),
     SportsScreen(),
     ScienceScreen(),
-    SettingsScreen(),
   ];
   int currentIndex = 0;
 
@@ -126,5 +121,23 @@ class NewsCubit extends Cubit<NewsStates> {
     } else {
       emit(AppNewsGetScienceSuccessState());
     }
+  }
+  //اول ما هفتح الاب هيبقى ليت مود كالر
+  bool isDark = false;
+  void changeDarkMode({bool? fromShared}){
+    if(fromShared != null){
+        isDark = fromShared;
+        emit(AppChangeDarkModel());
+    }else {
+      //لما اعمل كليك غيرلي الفولس لترو فا هيروح يغير الليت لدارك ويتوجل بينهم
+      isDark = !isDark;
+      //هنا وانا بدوس ببعت الداتا بعملها save في shared preference
+      CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+        //بعد ما بخلص بقوله غير الستيت
+        emit(AppChangeDarkModel());
+      });
+
+    }
+
   }
 }
