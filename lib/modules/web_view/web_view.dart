@@ -9,6 +9,7 @@ class WebViewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: WebView(
+        //بتاخد مني ال url فا هروح ابعته في الكونستركتور
         initialUrl: url,
       ),
     );

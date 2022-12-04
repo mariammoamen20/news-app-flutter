@@ -5,6 +5,7 @@ import 'package:news_app_flutter/modules/web_view/web_view.dart';
 
 Widget buildArticleItem(articles, context) => InkWell(
       onTap: () {
+        //المفروض لما ادوس على الايتم يفتحلي مصدر الخبر
         navigateTo(context, WebViewScreen(url: articles['url']));
       },
       child: Padding(
