@@ -1,8 +1,14 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:news_app_flutter/bloc_observer.dart';
 import 'package:news_app_flutter/layout/news_layout.dart';
+import 'package:news_app_flutter/shared/network/remote/dio_helper.dart';
 
 void main() {
+  Bloc.observer = MyBlocObserver();
+  DioHelper.init();
+
   runApp(const MyApp());
 }
 
@@ -16,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           //من غير type لونه هيبقى ابيض
           type: BottomNavigationBarType.fixed,
@@ -35,7 +42,10 @@ class MyApp extends StatelessWidget {
           elevation: 0.0,
         ),
       ),
-      home: const NewsLayout(),
+      //Directionality بتخلي الاب بدا ما يبدا من الشمال لليمين ممكن اخليه يبدا من اليمين لشمال في حاله العربي
+      home: const Directionality(
+          textDirection: TextDirection.rtl,
+          child: NewsLayout()),
     );
   }
 }

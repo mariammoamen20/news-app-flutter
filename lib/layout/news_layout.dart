@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_flutter/layout/cubit/cubit.dart';
 import 'package:news_app_flutter/layout/cubit/states.dart';
+import 'package:news_app_flutter/shared/network/remote/dio_helper.dart';
 
 class NewsLayout extends StatelessWidget {
   const NewsLayout({Key? key}) : super(key: key);
@@ -9,7 +10,9 @@ class NewsLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context)=>NewsCubit(),
+      //ممكن استخدم الطريقه دي ودي معناها اني هجيب الداتا كلها مره واحد اول اما اعمل رن مش مع دوسه البوتم ناف
+      //create: (BuildContext context)=>NewsCubit()..getBusinessData()..getSportsData()..getScienceData(),
+      create: (BuildContext context)=>NewsCubit()..getBusinessData()..getSportsData()..getScienceData(),
       child: BlocConsumer<NewsCubit , NewsStates>(
         listener: (context,state){},
         builder: (context,state){
