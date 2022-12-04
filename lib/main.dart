@@ -31,88 +31,81 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => NewsCubit()..changeDarkMode(fromShared: isDark),
-        ),
-        BlocProvider(
-          create: (context) => NewsCubit()..getBusinessData(),
-        ),
-      ],
-      child: BlocConsumer<NewsCubit, NewsStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.deepOrange,
-              bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                  //من غير type لونه هيبقى ابيض
+    return BlocProvider(
+    create:(context) => NewsCubit()..getBusinessData()..changeDarkMode(fromShared: isDark),
+        child: BlocConsumer<NewsCubit, NewsStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primarySwatch: Colors.deepOrange,
+                bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                    //من غير type لونه هيبقى ابيض
+                    backgroundColor: Colors.white,
+                    type: BottomNavigationBarType.fixed,
+                    selectedItemColor: Colors.deepOrange,
+                    unselectedItemColor: Colors.grey),
+                scaffoldBackgroundColor: Colors.white,
+                appBarTheme: const AppBarTheme(
+                  iconTheme: IconThemeData(color: Colors.black, size: 35.0),
+                  titleTextStyle: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                  backwardsCompatibility: false,
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: Colors.white,
+                    statusBarIconBrightness: Brightness.dark,
+                  ),
                   backgroundColor: Colors.white,
-                  type: BottomNavigationBarType.fixed,
-                  selectedItemColor: Colors.deepOrange,
-                  unselectedItemColor: Colors.grey),
-              scaffoldBackgroundColor: Colors.white,
-              appBarTheme: const AppBarTheme(
-                iconTheme: IconThemeData(color: Colors.black, size: 35.0),
-                titleTextStyle: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-                backwardsCompatibility: false,
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.white,
-                  statusBarIconBrightness: Brightness.dark,
+                  elevation: 0.0,
                 ),
-                backgroundColor: Colors.white,
-                elevation: 0.0,
+                textTheme: const TextTheme(
+                  bodyText1: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.0,
+                      color: Colors.black),
+                ),
               ),
-              textTheme: const TextTheme(
-                bodyText1: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.0,
-                    color: Colors.black),
-              ),
-            ),
-            darkTheme: ThemeData(
-              primarySwatch: Colors.deepOrange,
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                  //من غير type لونه هيبقى ابيض
+              darkTheme: ThemeData(
+                primarySwatch: Colors.deepOrange,
+                bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    //من غير type لونه هيبقى ابيض
+                    backgroundColor: HexColor('333739'),
+                    type: BottomNavigationBarType.fixed,
+                    selectedItemColor: Colors.deepOrange,
+                    unselectedItemColor: Colors.grey),
+                appBarTheme: AppBarTheme(
+                  iconTheme: const IconThemeData(color: Colors.white, size: 35.0),
+                  titleTextStyle: const TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                  backwardsCompatibility: false,
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: HexColor('333739'),
+                    statusBarIconBrightness: Brightness.light,
+                  ),
                   backgroundColor: HexColor('333739'),
-                  type: BottomNavigationBarType.fixed,
-                  selectedItemColor: Colors.deepOrange,
-                  unselectedItemColor: Colors.grey),
-              appBarTheme: AppBarTheme(
-                iconTheme: const IconThemeData(color: Colors.white, size: 35.0),
-                titleTextStyle: const TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                backwardsCompatibility: false,
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: HexColor('333739'),
-                  statusBarIconBrightness: Brightness.light,
+                  elevation: 0.0,
                 ),
-                backgroundColor: HexColor('333739'),
-                elevation: 0.0,
+                scaffoldBackgroundColor: HexColor('333739'),
+                textTheme: const TextTheme(
+                  bodyText1: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.0,
+                      color: Colors.white),
+                ),
               ),
-              scaffoldBackgroundColor: HexColor('333739'),
-              textTheme: const TextTheme(
-                bodyText1: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.0,
-                    color: Colors.white),
-              ),
-            ),
-            themeMode: NewsCubit.get(context).isDark
-                ? ThemeMode.dark
-                : ThemeMode.light,
-            //Directionality بتخلي الاب بدا ما يبدا من الشمال لليمين ممكن اخليه يبدا من اليمين لشمال في حاله العربي
-            home: const NewsLayout(),
-          );
-        },
-      ),
-    );
+              themeMode: NewsCubit.get(context).isDark
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              //Directionality بتخلي الاب بدا ما يبدا من الشمال لليمين ممكن اخليه يبدا من اليمين لشمال في حاله العربي
+              home: const NewsLayout(),
+            );
+          },
+        ),
+      );
   }
 }
