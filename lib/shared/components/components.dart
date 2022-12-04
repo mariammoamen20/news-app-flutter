@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget buildArticleItem(articles) => Padding(
+Widget buildArticleItem(articles,context) => Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
         children: [
@@ -34,10 +34,7 @@ Widget buildArticleItem(articles) => Padding(
                       articles['title'],
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                   Text(
@@ -56,7 +53,7 @@ Widget articleBuilder(list)=>ConditionalBuilder(
   //ليه بعمل الكوندشن كده ومبعملش الكوندكش على اللودينج علشان لما اللودينج بيدي ايرور بس انه مبيحلقش يجيب الداتا علشان تتعرض
   condition:list.isNotEmpty,
   builder: (BuildContext context) => ListView.separated(
-      itemBuilder: (context, index) => buildArticleItem(list[index]),
+      itemBuilder: (context, index) => buildArticleItem(list[index],context),
       itemCount: list.length,
       separatorBuilder: (context, index) => Container(
         height: 1.0,
