@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget buildArticleItem(articles,context) => Padding(
+Widget buildArticleItem(articles, context) => Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
         children: [
@@ -11,7 +11,7 @@ Widget buildArticleItem(articles,context) => Padding(
             height: 120.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              image:  DecorationImage(
+              image: DecorationImage(
                 image: NetworkImage(
                   articles['urlToImage'] ?? "",
                 ),
@@ -28,7 +28,7 @@ Widget buildArticleItem(articles,context) => Padding(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
-                children:  [
+                children: [
                   Expanded(
                     child: Text(
                       articles['title'],
@@ -49,17 +49,22 @@ Widget buildArticleItem(articles,context) => Padding(
       ),
     );
 
-Widget articleBuilder(list)=>ConditionalBuilder(
-  //ليه بعمل الكوندشن كده ومبعملش الكوندكش على اللودينج علشان لما اللودينج بيدي ايرور بس انه مبيحلقش يجيب الداتا علشان تتعرض
-  condition:list.isNotEmpty,
-  builder: (BuildContext context) => ListView.separated(
-      itemBuilder: (context, index) => buildArticleItem(list[index],context),
-      itemCount: list.length,
-      separatorBuilder: (context, index) => Container(
-        height: 1.0,
-        width: double.infinity,
-        color: Colors.grey,
-      )),
-  fallback: (BuildContext context) =>
-  const Center(child: CircularProgressIndicator()),
-);
+Widget articleBuilder(list) => ConditionalBuilder(
+      //ليه بعمل الكوندشن كده ومبعملش الكوندكش على اللودينج علشان لما اللودينج بيدي ايرور بس انه مبيحلقش يجيب الداتا علشان تتعرض
+      condition: list.isNotEmpty,
+      builder: (BuildContext context) => ListView.separated(
+          itemBuilder: (context, index) =>
+              buildArticleItem(list[index], context),
+          itemCount: list.length,
+          separatorBuilder: (context, index) => Container(
+                height: 1.0,
+                width: double.infinity,
+                color: Colors.grey,
+              )),
+      fallback: (BuildContext context) =>
+          const Center(child: CircularProgressIndicator()),
+    );
+
+void navigateTo(context, widget) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
+}

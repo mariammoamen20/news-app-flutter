@@ -10,7 +10,7 @@ import 'package:news_app_flutter/layout/news_layout.dart';
 import 'package:news_app_flutter/shared/network/local/cash_helper.dart';
 import 'package:news_app_flutter/shared/network/remote/dio_helper.dart';
 
-void main() async{
+void main() async {
   //بيتاكد ان كل حاجه في الميثود دي خلصت وبعدين يفتح او يرن الابيليكشن
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
@@ -31,10 +31,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..getBusinessData()..changeDarkMode(
-        fromShared: isDark
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NewsCubit()..changeDarkMode(fromShared: isDark),
+        ),
+        BlocProvider(
+          create: (context) => NewsCubit()..getBusinessData(),
+        ),
+      ],
       child: BlocConsumer<NewsCubit, NewsStates>(
         listener: (context, state) {},
         builder: (context, state) {
